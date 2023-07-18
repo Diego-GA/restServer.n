@@ -1,5 +1,8 @@
-import { Role } from "../models/role.js";
-import { Usuario } from "../models/usuario.js";
+import {    Categoria, 
+            Producto, 
+            Role, 
+            Usuario } from "../models/index.js";
+
 
 const esRoleValido = async( rol = '' ) => {
     
@@ -27,9 +30,29 @@ const existeUsuarioPorId = async( id = '' ) => {
 
 }
 
+const existeCategoriaPorId = async ( id ) => {
+
+    const existeCategoria = await Categoria.findById( id )
+    if( !existeCategoria ){
+        throw new Error(`El id no existe ${ id }`)
+    }
+} 
+
+const existeProductoPorId = async ( id ) => {
+    
+    const  existeProducto = await Producto.findById( id )
+
+    if( !existeProducto ) {
+        throw new Error(`El id no existe ${ id }`)
+    }
+
+}
+
 
 export {
     esRoleValido,
     emailExiste,
-    existeUsuarioPorId
+    existeUsuarioPorId,
+    existeCategoriaPorId,
+    existeProductoPorId
 }
